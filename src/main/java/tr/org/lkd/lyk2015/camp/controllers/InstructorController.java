@@ -47,18 +47,21 @@ public class InstructorController {
 		Instructor instructorNew = instructorService.getById(instructor.getId());
 
 		model.addAttribute("instructor", instructorNew);
-		// model.addAttribute("message", message);
+
+		model.addAttribute("courses", courseService.getAll());
 
 		return "/admin/updateInstructor";
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST, params = "id")
 	public String editPost(@ModelAttribute Instructor instructor, Model model,
-			@RequestParam(value = "message", required = false) String message) {
+			@RequestParam(value = "message", required = false) String message,
+			@RequestParam("courseIds") List<Long> ids) {
 
-		Instructor instructorNew = instructorService.update(instructor);
+		Instructor instructorNew = instructorService.update(instructor, ids);
 
 		model.addAttribute("instructor", instructorNew);
+
 		model.addAttribute("message", message);
 
 		return "redirect:/instructors";

@@ -33,8 +33,25 @@ public class InstructorService extends GenericService<Instructor> {
 
 		instructor.setCourses(courseSet);
 
-		// instructor.getCourses().addAll(courses);
+		instructor.getCourses().addAll(courses);
 
 		instructorDao.create(instructor);
+	}
+
+	public Instructor update(Instructor instructor, List<Long> ids) {
+
+		List<Course> courses = courseDao.getByIds(ids);
+
+		Set<Course> courseSet = new HashSet<>();
+
+		courses.addAll(courses);
+
+		instructor.setCourses(courseSet);
+
+		instructor.getCourses().addAll(courses);
+
+		instructorDao.update(instructor);
+
+		return null;
 	}
 }
