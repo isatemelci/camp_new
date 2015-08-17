@@ -60,6 +60,14 @@
 							class="form-control" id="tckn" placeholder="TC KN"
 							th:field="*{tckn}" th:value="${instructor.tckn}">
 					</div>
+
+					<div class="form-group">
+						<select multiple name="courseIds">
+							<option th:each="course : ${courses}" th:value="${course.id}"
+								th:text="${course.name}">Wireframe</option>
+						</select>
+					</div>
+
 					<button type="submit" class="btn btn-info" th:type="submit">Submit</button>
 
 				</div>

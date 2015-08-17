@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tr.org.lkd.lyk2015.camp.models.Instructor;
+import tr.org.lkd.lyk2015.camp.service.CourseService;
 import tr.org.lkd.lyk2015.camp.service.InstructorService;
 
 @Controller
@@ -21,16 +22,21 @@ public class InstructorController {
 	@Autowired
 	private InstructorService instructorService;
 
+	@Autowired
+	private CourseService courseService;
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String test(@ModelAttribute Instructor instructor) {
+	public String test(@ModelAttribute Instructor instructor, Model model) {
+
+		model.addAttribute("courses", courseService.getAll());
 
 		return "admin/instructorCreateForm";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(@ModelAttribute Instructor instructor) {
+	public String create(@ModelAttribute Instructor instructor, @RequestParam("courseIds") List<Long> ids) {
 
-		instructorService.create(instructor);
+		instructorService.create(instructor, ids);
 
 		return "redirect:/instructors";
 	}

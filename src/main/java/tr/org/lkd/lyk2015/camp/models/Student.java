@@ -1,5 +1,6 @@
 package tr.org.lkd.lyk2015.camp.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class Student extends AbstractUser {
 	private Sex sex;
 
 	@OneToMany(mappedBy = "owner")
-	private Set<ApplicationForm> applicationForms;
+	private Set<ApplicationForm> applicationForms = new HashSet<>();
 
 	public Sex getSex() {
 		return sex;

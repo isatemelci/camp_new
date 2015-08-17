@@ -1,5 +1,6 @@
 package tr.org.lkd.lyk2015.camp.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ public class Course extends AbstractBaseModel {
 	private Boolean active = true;
 
 	@ManyToMany
-	private Set<Instructor> instructors;
+	private Set<Instructor> instructors = new HashSet<>();
 
 	public Boolean isActive() {
 		return active;
