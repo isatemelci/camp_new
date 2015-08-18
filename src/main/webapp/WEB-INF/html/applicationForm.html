@@ -3,15 +3,19 @@
 
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8">
-			<form id="theForm" class="form-horizontal well" th:object="${form}">
+			<form th:action="@{/applicationform}" th:object="${form}"
+				id="theForm" class="form-horizontal well" method="post">
 
 				<div class="form-group">
 					<label for="email" class="col-lg-2 col-md-2 control-label">E-postanız</label>
-					<div class="col-lg-10 col-md-10">
+					<div class="col-lg-10 col-md-10" th:errorclass="has-error"
+						name="student.email">
 						<input type="email" class="form-control floating-label" id="email"
 							th:field="*{student.email}" name="email" placeholder="E-posta"
 							required> <span class="help-block">Ön koşul
 							sınavında verdiğiniz eposta ile aynı olmalı!</span>
+						<p th:if="${#fields.hasErrors('student.email')}"
+							th:errors="*{student.email}" class="text-danger"></p>
 					</div>
 				</div>
 
@@ -37,10 +41,13 @@
 					<div class="form-group">
 						<label for="citizenshipNumber"
 							class="col-lg-2 col-md-2 control-label">Tc Kimlik No</label>
-						<div class="col-lg-10 col-md-10">
+						<div class="col-lg-10 col-md-10" th:errorclass="has-error"
+							name="student.tckn">
 							<input type="number" class="form-control floating-label"
 								id="citizenshipNumber" name="citizenshipNumber"
 								th:field="*{student.tckn}" placeholder="Tc Kimlik No" required>
+							<p th:if="${#fields.hasErrors('student.tckn')}"
+								th:errors="*{student.tckn}" class="text-danger"></p>
 						</div>
 					</div>
 
