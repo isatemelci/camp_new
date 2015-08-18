@@ -82,20 +82,20 @@
 							<div class="radio radio-primary">
 								<label> <input type="radio"
 									th:field="*{application.workStatus}" id="workStatus1"
-									name="workStatus" value="Çalışıyorum"> Çalışıyorum
+									name="workStatus" value="WORKING"> Çalışıyorum
 								</label>
 							</div>
 							<div class="radio radio-primary">
 								<label> <input type="radio"
 									th:field="*{application.workStatus}" id="workStatus2"
-									name="workStatus" value="Öğrenciyim"> Öğrenciyim
+									name="workStatus" value="STUDENT"> Öğrenciyim
 								</label>
 							</div>
 							<div class="radio radio-primary">
 								<label> <input type="radio"
 									th:field="*{application.workStatus}" id="workStatus2"
-									name="workStatus" value="Çalışmıyorum (ve öğrenci değilim)">
-									Çalışmıyorum (ve öğrenci değilim)
+									name="workStatus" value="NOT_WORKING"> Çalışmıyorum (ve
+									öğrenci değilim)
 								</label>
 							</div>
 						</div>
@@ -107,8 +107,9 @@
 						<div class="col-lg-10 col-md-10">
 							<div class="togglebutton">
 								<label> <input type="checkbox" name="isOfficer"
-									th:field="*{application.officer}" id="isOfficer"> Kamu
-									çalışanıyım
+									th:field="*{application.officer}"
+									th:checked="*{application.officer}" id="isOfficer">
+									Kamu çalışanıyım
 								</label>
 							</div>
 							<span class="help-block">Kamu çalışanlarına öncelik
@@ -165,21 +166,17 @@
 
 					<table class="table table-hover table-bordered">
 						<thead>
-							<th>ID</th>
 							<th>Name</th>
 							<th>Prerequisites</th>
-							<th>Details Page Link</th>
 						</thead>
 						<tbody>
 							<tr th:each="course : ${courses}" th:object="${course}">
 
-								<td th:text="*{id}"></td>
-
-								<td th:text="*{name}"></td>
+								<td><a th:text="*{name}" target="_blank"
+									th:href="*{detailsPageLink}">Course Link</a></td>
 
 								<td th:text="*{prerequisites}"></td>
 
-								<td th:text="*{detailsPageLink}"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -188,9 +185,12 @@
 						<label for="firstChoice" class="col-lg-2 col-md-2 control-label">1.
 							Tercih</label>
 						<div class="col-lg-10 col-md-10">
-							<select name="courseIds" class="form-control">
+							<select id="firstChoice" class="form-control"
+								th:field="*{preferredCourseIds}">
+								<option value="">Seçiniz</option>
 								<option th:each="course : ${courses}" th:value="${course.id}"
-									th:text="${course.name}">Wireframe</option>
+									th:text="${course.name}"
+									th:selected="${#lists.contains(form.preferredCourseIds, course.id)}">Wireframe</option>
 							</select>
 						</div>
 					</div>
@@ -199,9 +199,12 @@
 						<label for="secondChoice" class="col-lg-2 col-md-2 control-label">2.
 							Tercih</label>
 						<div class="col-lg-10 col-md-10">
-							<select name="courseIds" class="form-control">
+							<select id="secondChoice" class="form-control"
+								th:field="*{preferredCourseIds}">
+								<option value="">Seçiniz</option>
 								<option th:each="course : ${courses}" th:value="${course.id}"
-									th:text="${course.name}">Wireframe</option>
+									th:text="${course.name}"
+									th:selected="${#lists.contains(form.preferredCourseIds, course.id)}">Wireframe</option>
 							</select>
 						</div>
 					</div>
@@ -210,9 +213,12 @@
 						<label for="thirdChoice" class="col-lg-2 col-md-2 control-label">3.
 							Tercih</label>
 						<div class="col-lg-10 col-md-10">
-							<select name="courseIds" class="form-control">
+							<select id="thirdChoice" class="form-control"
+								th:field="*{preferredCourseIds}">
+								<option value="">Seçiniz</option>
 								<option th:each="course : ${courses}" th:value="${course.id}"
-									th:text="${course.name}">Wireframe</option>
+									th:text="${course.name}"
+									th:selected="${#lists.contains(form.preferredCourseIds, course.id)}">Wireframe</option>
 							</select> <span class="help-block">Üç tercih yapmak zorunda
 								değilsiniz, tek tercih de yapabilirsiniz.</span>
 						</div>
@@ -236,8 +242,9 @@
 					<div class="col-lg-10 col-md-10">
 						<div class="togglebutton">
 							<label> <input type="checkbox" name="needAccomodation"
-								th:field="*{application.needAccomodation}" id="needAccomodation">
-								Yurtta konaklamak istiyorum
+								th:field="*{application.needAccomodation}"
+								th:checked="*{application.needAccomodation}"
+								id="needAccomodation"> Yurtta konaklamak istiyorum
 							</label>
 						</div>
 						<span class="help-block">Yurtta konaklamak ücretlidir.</span>

@@ -43,7 +43,7 @@ public class Application extends AbstractBaseModel {
 	@ManyToOne
 	private Student owner;
 
-	private Boolean needAccomodation = false;
+	private Boolean needAccomodation = true;
 
 	public WorkStatus getWorkStatus() {
 		return workStatus;
