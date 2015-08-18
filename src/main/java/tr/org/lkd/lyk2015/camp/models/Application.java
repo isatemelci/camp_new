@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
-public class ApplicationForm extends AbstractBaseModel {
+public class Application extends AbstractBaseModel {
 
 	public enum WorkStatus {
 		WORKING, STUDENT, NOT_WORKING
@@ -33,7 +33,7 @@ public class ApplicationForm extends AbstractBaseModel {
 
 	private String workDetails;
 
-	private Integer englishLevel;
+	private Integer englishLevel = 0;
 
 	private String githubLink;
 
@@ -43,7 +43,7 @@ public class ApplicationForm extends AbstractBaseModel {
 	@ManyToOne
 	private Student owner;
 
-	private Boolean needAccomodation;
+	private Boolean needAccomodation = false;
 
 	public WorkStatus getWorkStatus() {
 		return workStatus;
@@ -101,14 +101,6 @@ public class ApplicationForm extends AbstractBaseModel {
 		this.preferredCourses = preferredCourses;
 	}
 
-	public Boolean isNeedAccomodation() {
-		return needAccomodation;
-	}
-
-	public void setNeedAccomodation(Boolean needAccomodation) {
-		this.needAccomodation = needAccomodation;
-	}
-
 	public Integer getYear() {
 		return year;
 	}
@@ -136,4 +128,13 @@ public class ApplicationForm extends AbstractBaseModel {
 	public void setEnglishLevel(Integer englishLevel) {
 		this.englishLevel = englishLevel;
 	}
+
+	public Boolean getNeedAccomodation() {
+		return needAccomodation;
+	}
+
+	public void setNeedAccomodation(Boolean needAccomodation) {
+		this.needAccomodation = needAccomodation;
+	}
+
 }

@@ -3,7 +3,6 @@ package tr.org.lkd.lyk2015.camp.models;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 

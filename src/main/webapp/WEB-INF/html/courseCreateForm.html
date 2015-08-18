@@ -9,7 +9,7 @@
 
 			<form action="#" th:action="@{/courses/create}" th:object="${course}"
 				method="post">
-				<div class="col-md-4">
+				<div class="col-md-12">
 
 					<div class="form-group">
 						<label for="InputName">Name</label> <input type="text"
@@ -36,7 +36,7 @@
 							placeholder="Details Page Link" th:field="*{detailsPageLink}"
 							th:value="${course.detailsPageLink}">
 					</div>
-					
+
 
 					<button type="submit" class="btn btn-info" th:type="submit">Submit</button>
 

@@ -1,8 +1,6 @@
 package tr.org.lkd.lyk2015.camp.service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,14 +24,16 @@ public class InstructorService extends GenericService<Instructor> {
 	public void create(Instructor instructor, List<Long> ids) {
 
 		List<Course> courses = courseDao.getByIds(ids);
-
-		Set<Course> courseSet = new HashSet<>();
-
-		courses.addAll(courses);
-
-		instructor.setCourses(courseSet);
+		//
+		// Set<Course> courseSet = new HashSet<>();
 
 		instructor.getCourses().addAll(courses);
+
+		// courses.addAll(courses);
+
+		// instructor.setCourses(courseSet);
+
+		// instructor.getCourses().addAll(courses);
 
 		instructorDao.create(instructor);
 	}
@@ -42,16 +42,15 @@ public class InstructorService extends GenericService<Instructor> {
 
 		List<Course> courses = courseDao.getByIds(ids);
 
-		Set<Course> courseSet = new HashSet<>();
-
-		courses.addAll(courses);
-
-		instructor.setCourses(courseSet);
+		// Set<Course> courseSet = new HashSet<>();
+		//
+		// courses.addAll(courses);
+		//
+		// instructor.setCourses(courseSet);
 
 		instructor.getCourses().addAll(courses);
 
-		instructorDao.update(instructor);
+		return instructorDao.update(instructor);
 
-		return null;
 	}
 }

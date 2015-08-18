@@ -20,7 +20,7 @@ public class Student extends AbstractUser {
 	private Sex sex;
 
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-	private Set<ApplicationForm> applicationForms = new HashSet<>();
+	private Set<Application> applicationForms = new HashSet<>();
 
 	public Sex getSex() {
 		return sex;
@@ -30,11 +30,11 @@ public class Student extends AbstractUser {
 		this.sex = sex;
 	}
 
-	public Set<ApplicationForm> getApplicationForms() {
+	public Set<Application> getApplicationForms() {
 		return applicationForms;
 	}
 
-	public void setApplicationForms(Set<ApplicationForm> applicationForms) {
+	public void setApplicationForms(Set<Application> applicationForms) {
 		this.applicationForms = applicationForms;
 	}
 
