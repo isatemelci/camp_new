@@ -1,6 +1,5 @@
 package tr.org.lkd.lyk2015.camp.controllers.validators;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +11,8 @@ import org.springframework.validation.Validator;
 import tr.org.lkd.lyk2015.camp.models.Application.WorkStatus;
 import tr.org.lkd.lyk2015.camp.models.Student;
 import tr.org.lkd.lyk2015.camp.models.dto.ApplicationFormDto;
+import tr.org.lkd.lyk2015.camp.service.BlacklistValidationService;
+import tr.org.lkd.lyk2015.camp.service.ExamValidationService;
 import tr.org.lkd.lyk2015.camp.service.TcknValidationService;
 
 @Component
@@ -19,6 +20,12 @@ public class ApplicationFormValidator implements Validator {
 
 	@Autowired
 	TcknValidationService tcknValidationService;
+
+	@Autowired
+	BlacklistValidationService blacklistValidationService;
+
+	@Autowired
+	ExamValidationService examValidationService;
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -43,7 +50,7 @@ public class ApplicationFormValidator implements Validator {
 		}
 
 		// check course selection size
-		application.getPreferredCourseIds().retainAll(Collections.singleton(null));
+		// application.getPreferredCourseIds().retainAll(Collections.singleton(null));
 
 		if (application.getPreferredCourseIds().size() == 0) {
 			errors.rejectValue("preferredCourseIds", "error.preferredCourseNoSelection",
@@ -70,6 +77,25 @@ public class ApplicationFormValidator implements Validator {
 		if (!tcknValid) {
 
 			errors.rejectValue("student.tckn", "error.tcknInvalid", "TC Kimlik no hatalı...");
+
+		}
+
+		boolean blackListValidation = this.blacklistValidationService.validate(student.getTckn(), student.getEmail(),
+				student.getName(), student.getSurname());
+
+		if (!blackListValidation) {
+
+			errors.rejectValue("student.tckn", "error.tcknBlacklist", "TC Kimlik No kara listededir.");
+			errors.rejectValue("student.email", "error.emailInBlacklist", "Email kara listededir.");
+
+		}
+
+		boolean examValidation = this.examValidationService.validate(student.getTckn(), student.getEmail());
+
+		if (!examValidation) {
+
+			errors.rejectValue("student.tckn", "error.tcknExamValidation", "Sınavı tamamlayınız.");
+			errors.rejectValue("student.email", "error.emailExamValidaton", "Sınavı tamamlayınız.");
 
 		}
 

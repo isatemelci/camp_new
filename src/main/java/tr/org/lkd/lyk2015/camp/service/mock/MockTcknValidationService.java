@@ -1,6 +1,8 @@
-package tr.org.lkd.lyk2015.camp.service;
+package tr.org.lkd.lyk2015.camp.service.mock;
 
 import org.springframework.stereotype.Service;
+
+import tr.org.lkd.lyk2015.camp.service.TcknValidationService;
 
 @Service
 public class MockTcknValidationService implements TcknValidationService {

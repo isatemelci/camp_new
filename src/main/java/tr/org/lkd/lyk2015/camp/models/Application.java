@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 
 /**
  * This entity represents an application form which is submitted by a Student.
- * 
+ *
  * Same student may submit different forms in different years.
  *
  */
@@ -37,6 +37,10 @@ public class Application extends AbstractBaseModel {
 
 	private String githubLink;
 
+	private Boolean validated = false;
+
+	private String validationId;
+
 	@OneToMany
 	private Set<Course> preferredCourses = new HashSet<>();
 
@@ -46,7 +50,7 @@ public class Application extends AbstractBaseModel {
 	private Boolean needAccomodation = true;
 
 	public WorkStatus getWorkStatus() {
-		return workStatus;
+		return this.workStatus;
 	}
 
 	public void setWorkStatus(WorkStatus workStatus) {
@@ -54,7 +58,7 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public boolean isOfficer() {
-		return officer;
+		return this.officer;
 	}
 
 	public void setOfficer(boolean officer) {
@@ -62,7 +66,7 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public String getCorporation() {
-		return corporation;
+		return this.corporation;
 	}
 
 	public void setCorporation(String corporation) {
@@ -70,7 +74,7 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public String getWorkDetails() {
-		return workDetails;
+		return this.workDetails;
 	}
 
 	public void setWorkDetails(String workDetails) {
@@ -78,7 +82,7 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public int getEnglishLevel() {
-		return englishLevel;
+		return this.englishLevel;
 	}
 
 	public void setEnglishLevel(int englishLevel) {
@@ -86,7 +90,7 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public String getGithubLink() {
-		return githubLink;
+		return this.githubLink;
 	}
 
 	public void setGithubLink(String githubLink) {
@@ -94,7 +98,7 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public Set<Course> getPreferredCourses() {
-		return preferredCourses;
+		return this.preferredCourses;
 	}
 
 	public void setPreferredCourses(Set<Course> preferredCourses) {
@@ -102,7 +106,7 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public Integer getYear() {
-		return year;
+		return this.year;
 	}
 
 	public void setYear(Integer year) {
@@ -110,7 +114,7 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public Boolean getOfficer() {
-		return officer;
+		return this.officer;
 	}
 
 	public void setOfficer(Boolean officer) {
@@ -118,7 +122,7 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public Student getOwner() {
-		return owner;
+		return this.owner;
 	}
 
 	public void setOwner(Student owner) {
@@ -130,11 +134,27 @@ public class Application extends AbstractBaseModel {
 	}
 
 	public Boolean getNeedAccomodation() {
-		return needAccomodation;
+		return this.needAccomodation;
 	}
 
 	public void setNeedAccomodation(Boolean needAccomodation) {
 		this.needAccomodation = needAccomodation;
+	}
+
+	public Boolean getValidated() {
+		return this.validated;
+	}
+
+	public void setValidated(Boolean validated) {
+		this.validated = validated;
+	}
+
+	public String getValidationId() {
+		return this.validationId;
+	}
+
+	public void setValidationId(String validationId) {
+		this.validationId = validationId;
 	}
 
 }

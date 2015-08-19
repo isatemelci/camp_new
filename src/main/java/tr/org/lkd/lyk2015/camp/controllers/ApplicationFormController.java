@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import tr.org.lkd.lyk2015.camp.controllers.validators.ApplicationFormValidator;
 import tr.org.lkd.lyk2015.camp.models.dto.ApplicationFormDto;
+import tr.org.lkd.lyk2015.camp.service.ApplicationService;
 import tr.org.lkd.lyk2015.camp.service.CourseService;
 
 @Controller
@@ -25,6 +26,9 @@ public class ApplicationFormController {
 
 	@Autowired
 	private CourseService courseService;
+
+	@Autowired
+	private ApplicationService applicationService;
 
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
@@ -42,6 +46,13 @@ public class ApplicationFormController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@ModelAttribute("form") @Valid ApplicationFormDto applicationFormDto,
 			BindingResult bindingResult, Model model) {
+
+		String a = this.applicationService.generateEmailUUID();
+
+		String b = this.applicationService.sendEmailConfirmation(applicationFormDto.getStudent().getEmail(),
+				"mail yolla", a);
+
+		model.addAttribute("mailmessage", b);
 
 		model.addAttribute("courses", this.courseService.getAllActive());
 

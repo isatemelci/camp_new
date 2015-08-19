@@ -1,6 +1,6 @@
 package tr.org.lkd.lyk2015.camp.models.dto;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,10 +18,10 @@ public class ApplicationFormDto {
 	private Student student = new Student();
 
 	@Size(min = 1, max = 3)
-	private List<Long> preferredCourseIds = new ArrayList<>();
+	private List<Long> preferredCourseIds = Arrays.asList(null, null, null);
 
 	public Application getApplication() {
-		return application;
+		return this.application;
 	}
 
 	public void setApplication(Application application) {
@@ -29,7 +29,7 @@ public class ApplicationFormDto {
 	}
 
 	public Student getStudent() {
-		return student;
+		return this.student;
 	}
 
 	public void setStudent(Student student) {
@@ -37,7 +37,7 @@ public class ApplicationFormDto {
 	}
 
 	public List<Long> getPreferredCourseIds() {
-		return preferredCourseIds;
+		return this.preferredCourseIds;
 	}
 
 	public void setPreferredCourseIds(List<Long> preferredCourseIds) {

@@ -6,6 +6,10 @@
 			<form th:action="@{/applicationform}" th:object="${form}"
 				id="theForm" class="form-horizontal well" method="post">
 
+				<div>
+					<p th:text="${mailmessage}"></p>
+				</div>
+
 				<div class="form-group">
 					<label for="email" class="col-lg-2 col-md-2 control-label">E-postanız</label>
 					<div class="col-lg-10 col-md-10" th:errorclass="has-error"
@@ -56,7 +60,7 @@
 						<div class="col-lg-10 col-md-10">
 							<input type="text" class="form-control floating-label"
 								id="firstName" th:field="*{student.name}" name="firstName"
-								placeholder="Adınız" required> <span class="help-block">Kimlikte
+								placeholder="Adınız"> <span class="help-block">Kimlikte
 								yazıldığı gibi (Tc No doğrulaması için).</span>
 						</div>
 					</div>
@@ -66,7 +70,7 @@
 						<div class="col-lg-10 col-md-10">
 							<input type="text" class="form-control floating-label"
 								id="lastName" th:field="*{student.surname}" name="lastName"
-								placeholder="Soyadınız" required>
+								placeholder="Soyadınız">
 						</div>
 					</div>
 
@@ -77,8 +81,8 @@
 							<input type="number" max="2000" min="1935"
 								class="form-control floating-label" id="birthDate"
 								th:field="*{student.birthDate}" name="birthDate"
-								placeholder="Doğum yılınız" required> <span
-								class="help-block">Yalnızca yıl: örneğin 1992.</span>
+								placeholder="Doğum yılınız"> <span class="help-block">Yalnızca
+								yıl: örneğin 1992.</span>
 						</div>
 					</div>
 
@@ -131,8 +135,7 @@
 							<textarea class="form-control floating-label" rows="3"
 								id="workDetails" name="workDetails"
 								th:field="*{application.workDetails}"
-								placeholder="Çalışıyorsanız kurumunuzu, öğrenciyseniz üniversitenizi belirtiniz."
-								required></textarea>
+								placeholder="Çalışıyorsanız kurumunuzu, öğrenciyseniz üniversitenizi belirtiniz."></textarea>
 						</div>
 					</div>
 
@@ -142,8 +145,7 @@
 							<textarea class="form-control floating-label" rows="3"
 								id="corporation" name="corporation"
 								th:field="*{application.corporation}"
-								placeholder="Çalışıyorsanız birim ve görevinizi, öğrenciyseniz bölüm ve sınıfınızı belirtiniz."
-								required></textarea>
+								placeholder="Çalışıyorsanız birim ve görevinizi, öğrenciyseniz bölüm ve sınıfınızı belirtiniz."></textarea>
 						</div>
 					</div>
 
@@ -192,12 +194,14 @@
 						<label for="firstChoice" class="col-lg-2 col-md-2 control-label">1.
 							Tercih</label>
 						<div class="col-lg-10 col-md-10">
-							<select id="firstChoice" class="form-control"
-								th:field="*{preferredCourseIds}">
-								<option value="">Seçiniz</option>
+
+							<select class="form-control" id="firstChoice"
+								th:field="*{preferredCourseIds[0]}">
+								<option value="">Seciniz</option>
 								<option th:each="course : ${courses}" th:value="${course.id}"
 									th:text="${course.name}"
-									th:selected="${#lists.contains(form.preferredCourseIds, course.id)}">Wireframe</option>
+									th:selected="${#lists.contains(form.preferredCourseIds, course.id)}">
+								</option>
 							</select>
 						</div>
 					</div>
@@ -206,12 +210,13 @@
 						<label for="secondChoice" class="col-lg-2 col-md-2 control-label">2.
 							Tercih</label>
 						<div class="col-lg-10 col-md-10">
-							<select id="secondChoice" class="form-control"
-								th:field="*{preferredCourseIds}">
-								<option value="">Seçiniz</option>
+							<select class="form-control" id="secondChoice"
+								th:field="*{preferredCourseIds[1]}">
+								<option value="">Seciniz</option>
 								<option th:each="course : ${courses}" th:value="${course.id}"
 									th:text="${course.name}"
-									th:selected="${#lists.contains(form.preferredCourseIds, course.id)}">Wireframe</option>
+									th:selected="${#lists.contains(form.preferredCourseIds, course.id)}">
+								</option>
 							</select>
 						</div>
 					</div>
@@ -220,31 +225,17 @@
 						<label for="thirdChoice" class="col-lg-2 col-md-2 control-label">3.
 							Tercih</label>
 						<div class="col-lg-10 col-md-10">
-							<select id="thirdChoice" class="form-control"
-								th:field="*{preferredCourseIds}">
-								<option value="">Seçiniz</option>
+							<select class="form-control" id="thirdChoice"
+								th:field="*{preferredCourseIds[2]}">
+								<option value="">Seciniz</option>
 								<option th:each="course : ${courses}" th:value="${course.id}"
 									th:text="${course.name}"
-									th:selected="${#lists.contains(form.preferredCourseIds, course.id)}">Wireframe</option>
+									th:selected="${#lists.contains(form.preferredCourseIds, course.id)}">
+								</option>
 							</select> <span class="help-block">Üç tercih yapmak zorunda
 								değilsiniz, tek tercih de yapabilirsiniz.</span>
 						</div>
 					</div>
-
-					<!-- 					<div class="form-group"> -->
-					<!-- 						<label for="needAccommodation" -->
-					<!-- 							class="col-lg-2 col-md-2 control-label"></label> -->
-					<!-- 						<div class="col-lg-10 col-md-10"> -->
-					<!-- 							<div class="togglebutton"> -->
-					<!-- 								<label> <input type="checkbox" name="needAccommodation" -->
-					<!-- 									id="needAccommodation" -->
-					<!-- 									th:field="*{application.needAccomodation}"> Yurtta -->
-					<!-- 									konaklamak istiyorum -->
-					<!-- 								</label> -->
-					<!-- 							</div> -->
-					<!-- 							<span class="help-block">Yurtta konaklamak ücretlidir.</span> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
 
 					<div class="col-lg-10 col-md-10">
 						<div class="togglebutton">
