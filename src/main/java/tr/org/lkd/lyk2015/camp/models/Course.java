@@ -23,7 +23,7 @@ public class Course extends AbstractBaseModel {
 	private Set<Instructor> instructors = new HashSet<>();
 
 	public Boolean isActive() {
-		return active;
+		return this.active;
 	}
 
 	public void setActive(Boolean active) {
@@ -31,7 +31,7 @@ public class Course extends AbstractBaseModel {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -39,7 +39,7 @@ public class Course extends AbstractBaseModel {
 	}
 
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
@@ -47,7 +47,7 @@ public class Course extends AbstractBaseModel {
 	}
 
 	public String getPrerequisites() {
-		return prerequisites;
+		return this.prerequisites;
 	}
 
 	public void setPrerequisites(String prerequisites) {
@@ -55,7 +55,7 @@ public class Course extends AbstractBaseModel {
 	}
 
 	public String getDetailsPageLink() {
-		return detailsPageLink;
+		return this.detailsPageLink;
 	}
 
 	public void setDetailsPageLink(String detailsPageLink) {
@@ -63,7 +63,7 @@ public class Course extends AbstractBaseModel {
 	}
 
 	public Set<Instructor> getInstructors() {
-		return instructors;
+		return this.instructors;
 	}
 
 	public void setInstructors(Set<Instructor> instructors) {

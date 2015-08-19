@@ -80,6 +80,7 @@ public class ApplicationFormValidator implements Validator {
 
 		}
 
+		// validate blacklist
 		boolean blackListValidation = this.blacklistValidationService.validate(student.getTckn(), student.getEmail(),
 				student.getName(), student.getSurname());
 
@@ -90,6 +91,7 @@ public class ApplicationFormValidator implements Validator {
 
 		}
 
+		// validate exam
 		boolean examValidation = this.examValidationService.validate(student.getTckn(), student.getEmail());
 
 		if (!examValidation) {

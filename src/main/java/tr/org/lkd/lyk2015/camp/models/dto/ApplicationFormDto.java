@@ -20,6 +20,13 @@ public class ApplicationFormDto {
 	@Size(min = 1, max = 3)
 	private List<Long> preferredCourseIds = Arrays.asList(null, null, null);
 
+	// public ApplicationFormDto() {
+	// preferredCourseIds = new ArrayList<>();
+	// preferredCourseIds.add(null);
+	// preferredCourseIds.add(null);
+	// preferredCourseIds.add(null);
+	// }
+
 	public Application getApplication() {
 		return this.application;
 	}

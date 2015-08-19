@@ -47,16 +47,29 @@ public class ApplicationFormController {
 	public String create(@ModelAttribute("form") @Valid ApplicationFormDto applicationFormDto,
 			BindingResult bindingResult, Model model) {
 
-		String a = this.applicationService.generateEmailUUID();
+		// String a = this.applicationService.generateEmailUUID();
+		//
+		// String b =
+		// this.applicationService.sendEmailConfirmation(applicationFormDto.getStudent().getEmail(),
+		// "mail yolla", a);
+		//
+		// model.addAttribute("mailmessage", b);
 
-		String b = this.applicationService.sendEmailConfirmation(applicationFormDto.getStudent().getEmail(),
-				"mail yolla", a);
+		if (!bindingResult.hasErrors()) {
 
-		model.addAttribute("mailmessage", b);
+			model.addAttribute("courses", this.courseService.getAllActive());
 
-		model.addAttribute("courses", this.courseService.getAllActive());
+			return "applicationForm";
 
-		return "applicationForm";
+		} else {
+
+			this.applicationService.create(applicationFormDto);
+			return "applicationSuccess";
+		}
+
+		// model.addAttribute("courses", this.courseService.getAllActive());
+		//
+		// return "applicationForm";
 	}
 
 }

@@ -56,7 +56,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Description("Thymeleaf template engine with Spring integration")
 	public SpringTemplateEngine templateEngine() {
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-		templateEngine.setTemplateResolver(templateResolver());
+		templateEngine.setTemplateResolver(this.templateResolver());
 
 		return templateEngine;
 	}
@@ -65,7 +65,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Description("Thymeleaf view resolver")
 	public ThymeleafViewResolver viewResolver() {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-		viewResolver.setTemplateEngine(templateEngine());
+		viewResolver.setTemplateEngine(this.templateEngine());
 		viewResolver.setContentType("text/html;charset=UTF-8");
 
 		return viewResolver;
@@ -96,7 +96,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 
 		sessionBuilder.scanPackages("tr.org.lkd.lyk2015.camp.models");
-		sessionBuilder.addProperties(getHibernateProperties());
+		sessionBuilder.addProperties(this.getHibernateProperties());
 
 		return sessionBuilder.buildSessionFactory();
 	}

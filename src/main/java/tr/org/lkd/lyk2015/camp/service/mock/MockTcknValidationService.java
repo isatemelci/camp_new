@@ -11,7 +11,7 @@ public class MockTcknValidationService implements TcknValidationService {
 	public boolean validate(String name, String surname, Long tckn) {
 
 		if (tckn.equals(1L)) {
-			return false;
+			return true;
 		}
 
 		return false;

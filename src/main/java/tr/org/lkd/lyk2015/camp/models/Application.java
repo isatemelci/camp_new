@@ -6,8 +6,8 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  * This entity represents an application form which is submitted by a Student.
@@ -41,10 +41,10 @@ public class Application extends AbstractBaseModel {
 
 	private String validationId;
 
-	@OneToMany
+	@ManyToMany
 	private Set<Course> preferredCourses = new HashSet<>();
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Student owner;
 
 	private Boolean needAccomodation = true;
