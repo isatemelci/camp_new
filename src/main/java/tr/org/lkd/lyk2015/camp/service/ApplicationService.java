@@ -22,7 +22,7 @@ public class ApplicationService extends GenericService<Application> {
 	@Autowired
 	private ApplicationDao applicationDao;
 
-	private static final String URL_BASE = "http://localhost:8080/camp_new/applications/validate/";
+	private static final String URL_BASE = "http://localhost:8080/camp/applications/validate/";
 
 	@Autowired
 	private CourseDao courseDao;
@@ -53,7 +53,7 @@ public class ApplicationService extends GenericService<Application> {
 
 		// add preferred courses to application entity
 		List<Course> courses = this.courseDao.getByIds(courseIds);
-
+		// application.getPreferredCourses().clear();
 		application.getPreferredCourses().addAll(courses);
 
 		// check if user exists on db
@@ -71,5 +71,10 @@ public class ApplicationService extends GenericService<Application> {
 		// saved application
 		this.applicationDao.create(application);
 
+	}
+
+	public Application validate(String uuid) {
+
+		return this.applicationDao.getByUuid(uuid);
 	}
 }
